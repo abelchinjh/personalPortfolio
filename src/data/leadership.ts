@@ -2,7 +2,7 @@ export const leadership = [
   {
     title: "Nyala Labs",
     period: "Founder & President · 2025 — present",
-    description: "A youth-led AI literacy and advocacy initiative. We make practical AI learning more accessible through workshops, builder communities and software for social impact.",
+    description: "A youth-led AI literacy and advocacy initiative making practical AI learning more accessible through workshops, builder communities and software for social impact.",
     highlight: "Grew a 200+ member community in two months and worked with the Selangor state government on AI literacy workshops for B40 children.",
     url: "https://linktr.ee/nyalalabs",
   },
@@ -12,8 +12,13 @@ export const leadership = [
     description: "Weekly small-group mathematics mentoring for students from low-income communities in Petaling Jaya, alongside technology work for the organisation.",
   },
   {
+    title: "SATS Ltd.",
+    period: "Incoming Automation & Innovation Intern · 2026",
+    description: "Joining the Digital Automation & Innovation team to work on practical enterprise automation and operational transformation.",
+  },
+  {
     title: "iMotorbike",
     period: "Business Intelligence Intern · 2025",
-    description: "Built Google Sheets automation and cron-based workflows to help a fast-growing Southeast Asian motorcycle platform organise business data.",
+    description: "Built Google Sheets automation and scheduled workflows to help a fast-growing Southeast Asian motorcycle platform organise business data.",
   },
 ];
