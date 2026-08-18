@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight, GitHubIcon } from "../components";
 import { projects } from "../data/projects";
 import { awards } from "../data/awards";
+import { education } from "../data/education";
 import { leadership } from "../data/leadership";
 
 export default function HomePage() {
@@ -19,18 +20,12 @@ export default function HomePage() {
             <Link className="button button-primary" to="/portfolio"><span>Explore selected work</span> <ArrowUpRight /></Link>
             <a className="button button-secondary" href="https://github.com/abelcjh" target="_blank" rel="noreferrer"><GitHubIcon /> <span>Follow the builds</span></a>
           </div>
-          <div className="hero-proof" aria-label="Highlights">
-            <div><strong>200+</strong><span>Nyala Labs members</span></div>
-            <div><strong>3rd</strong><span>GMI × Z.ai</span></div>
-            <div><strong>7th</strong><span>PyCon Singapore</span></div>
-          </div>
         </div>
 
         <div className="portrait-stage" data-reveal>
           <div className="orbit orbit-one" aria-hidden="true"><i /><i /></div>
           <div className="orbit orbit-two" aria-hidden="true"><i /></div>
           <span className="floating-label label-build">BUILD / TEST / SHIP</span>
-          <span className="floating-label label-place">MY ↔ SG</span>
           <aside className="profile-card">
             <div className="photo-frame"><img src="/AbelChinPhoto20260321.jpg" alt="Abel Chin" /></div>
             <div className="profile-grid">
@@ -53,8 +48,27 @@ export default function HomePage() {
         <p>My work sits where <em>frontier technology</em> meets the people and organisations that need it most: communities, operators, founders and Southeast Asian SMEs.</p>
       </section>
 
+      <section className="section education-section" aria-labelledby="education-title">
+        <div className="section-heading" data-reveal><p className="eyebrow">01 / Education</p><h2 id="education-title">Two chapters in Singapore, one path through computer science.</h2></div>
+        <div className="education-grid">
+          {education.map((item) => (
+            <article className="education-card" key={item.shortName} data-reveal>
+              <a className="education-logo" href={item.url} target="_blank" rel="noreferrer" aria-label={`Visit ${item.institution}`}>
+                <img src={item.logo} alt={`${item.institution} logo`} />
+              </a>
+              <div className="education-content">
+                <div className="education-meta"><span>{item.status}</span><span>{item.period}</span></div>
+                <h3>{item.institution}</h3>
+                <p className="education-programme">{item.programme}</p>
+                <p>{item.detail}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section className="section" aria-labelledby="featured-work">
-        <div className="section-heading" data-reveal><p className="eyebrow">01 / Selected work</p><h2 id="featured-work">Products with a point of view, not just a prompt.</h2><Link to="/portfolio" className="text-link">See all projects <ArrowUpRight /></Link></div>
+        <div className="section-heading" data-reveal><p className="eyebrow">02 / Selected work</p><h2 id="featured-work">Products with a point of view, not just a prompt.</h2><Link to="/portfolio" className="text-link">See all projects <ArrowUpRight /></Link></div>
         <div className="featured-grid">
           {featured.map((project, index) => (
             <article className={`work-card card-${index + 1}`} style={{ "--card-accent": project.accent } as CSSProperties} key={project.title} data-reveal>
@@ -73,12 +87,12 @@ export default function HomePage() {
       </section>
 
       <section className="section split-section" aria-labelledby="community-work">
-        <div className="section-heading sticky-heading" data-reveal><p className="eyebrow">02 / Leadership & community</p><h2 id="community-work">Learning in public, building with others.</h2><p className="section-note">Technology matters more when it creates agency for someone else.</p></div>
-        <div className="timeline">{leadership.map((item, index) => <article className="timeline-item" key={item.title} data-reveal><div><span className="timeline-number">0{index + 1}</span><h3>{item.title}</h3><p className="timeline-period">{item.period}</p></div><div><p>{item.description}</p>{item.highlight && <p className="highlight">{item.highlight}</p>}{item.url && <a className="text-link" href={item.url} target="_blank" rel="noreferrer">Explore Nyala Labs <ArrowUpRight /></a>}</div></article>)}</div>
+        <div className="section-heading sticky-heading" data-reveal><p className="eyebrow">03 / Leadership & community</p><h2 id="community-work">Learning in public, building with others.</h2><p className="section-note">Technology matters more when it creates agency for someone else.</p></div>
+        <div className="timeline">{leadership.map((item, index) => <article className="timeline-item" key={item.title} data-reveal><div><span className="timeline-number">0{index + 1}</span><div className="timeline-title">{item.logo && <span className="timeline-logo"><img src={item.logo} alt="" aria-hidden="true" /></span>}<h3>{item.title}</h3></div><p className="timeline-period">{item.period}</p></div><div><p>{item.description}</p>{item.highlight && <p className="highlight">{item.highlight}</p>}{item.url && <a className="text-link" href={item.url} target="_blank" rel="noreferrer">Explore Nyala Labs <ArrowUpRight /></a>}</div></article>)}</div>
       </section>
 
       <section className="section recognition-section" aria-labelledby="recognition">
-        <div className="section-heading" data-reveal><p className="eyebrow">03 / Recognition</p><h2 id="recognition">Milestones, with the receipts.</h2></div>
+        <div className="section-heading" data-reveal><p className="eyebrow">04 / Recognition</p><h2 id="recognition">Milestones, with the receipts.</h2></div>
         <div className="recognition-list">{awards.map((award, index) => <div className="recognition-row" key={award.title} data-reveal><span>0{index + 1}</span><strong>{award.title}</strong><p>{award.detail}</p></div>)}</div>
       </section>
 

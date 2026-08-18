@@ -5,4 +5,6 @@ export const awards = [
   { title: "Top 10 Finalist", detail: "Agnes AI Hackathon Singapore @ SMU · 2026" },
   { title: "Selected Builder", detail: "Sea × OpenAI Regional Codex Hackathon · 2026" },
   { title: "Selected Founder", detail: "PACE startup bootcamp by Artem Ventures · 2025" },
+  { title: "Champion", detail: "UNLEASH Hacks Singapore · Sustainability innovation challenge · 2022" },
+  { title: "Finalist", detail: "GGEF SDG Open Hack Singapore · Sustainability pitching competition · 2022" },
 ];
