@@ -6,9 +6,9 @@ export default function PortfolioPage() {
   return (
     <main className="work-page">
       <header className="work-header" data-reveal>
-        <p className="eyebrow"><span className="eyebrow-dot" /> Selected work · 2025—2026</p>
+        <p className="eyebrow"><span className="eyebrow-dot" /> Project archive · 2025—2026</p>
         <h1>Systems made to <span>move.</span></h1>
-        <p>Public products, competition builds and open-source experiments across responsible AI, accessibility, compliance, climate finance and community infrastructure. Repositories include work I own and collaborations where I contributed materially.</p>
+        <p>A complete archive of public products, competition builds, team collaborations and open-source experiments across responsible AI, accessibility, compliance, climate finance and community infrastructure.</p>
       </header>
 
       <div className="project-list">
