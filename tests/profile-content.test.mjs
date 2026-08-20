@@ -124,3 +124,10 @@ test("project entries identify their verified hackathon or programme without sta
   assert.doesNotMatch(projectData, /abelcjh\.github\.io/);
   assert.match(projectData, /github\.com\/abelchinjh\/personalPortfolio/);
 });
+
+test("Vercel serves React Router deep links through the SPA entry point", () => {
+  const config = JSON.parse(read("vercel.json"));
+  assert.deepEqual(config.rewrites, [
+    { source: "/(.*)", destination: "/index.html" },
+  ]);
+});
