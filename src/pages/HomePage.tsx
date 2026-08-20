@@ -18,7 +18,7 @@ export default function HomePage() {
           <p className="hero-text">I’m Abel Chin, a Malaysian computer science and business student at SMU, building at the intersection of agentic AI, public-good technology and Malaysia-first compliance infrastructure.</p>
           <div className="hero-actions">
             <Link className="button button-primary" to="/portfolio"><span>Explore selected work</span> <ArrowUpRight /></Link>
-            <a className="button button-secondary" href="https://github.com/abelcjh" target="_blank" rel="noreferrer"><GitHubIcon /> <span>Follow the builds</span></a>
+            <a className="button button-secondary" href="https://github.com/abelchinjh" target="_blank" rel="noreferrer"><GitHubIcon /> <span>Follow the builds</span></a>
           </div>
         </div>
 

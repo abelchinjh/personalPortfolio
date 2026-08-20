@@ -32,7 +32,7 @@ export default function PortfolioPage() {
       <section className="contact-card portfolio-contact" data-reveal>
         <p className="eyebrow">The work continues</p>
         <h2>Follow the builds as they become real.</h2>
-        <div className="hero-actions"><a className="button button-primary" href="https://github.com/abelcjh" target="_blank" rel="noreferrer"><span>Explore GitHub</span> <ArrowUpRight /></a><a className="button button-secondary" href="mailto:abelchinjh@gmail.com"><span>Start a conversation</span> <ArrowUpRight /></a></div>
+        <div className="hero-actions"><a className="button button-primary" href="https://github.com/abelchinjh" target="_blank" rel="noreferrer"><span>Explore GitHub</span> <ArrowUpRight /></a><a className="button button-secondary" href="mailto:abelchinjh@gmail.com"><span>Start a conversation</span> <ArrowUpRight /></a></div>
       </section>
     </main>
   );
