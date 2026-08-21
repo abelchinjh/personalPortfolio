@@ -6,7 +6,7 @@ export const education = [
     programme: "Bachelor of Science in Computer Science",
     period: "Aug 2026 — present",
     detail: "Recipient of the SMU ASEAN Undergraduate Scholarship.",
-    logo: "/brand-assets/smu.png",
+    logo: "/brand-assets/smu-horizontal.svg",
     url: "https://www.smu.edu.sg/",
   },
   {

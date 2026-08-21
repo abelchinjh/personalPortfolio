@@ -105,10 +105,10 @@ a:hover > .arrow { transform: translate(2px, -2px); }
 .text-link { display: inline-flex; align-items: center; gap: .35rem; color: var(--amber); font-size: .82rem; font-weight: 800; }
 .education-section { border-bottom: 1px solid var(--line); }
 .education-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 3.8rem; }
-.education-card { min-height: 310px; display: grid; grid-template-columns: minmax(130px, .62fr) 1.38fr; border: 1px solid var(--line); background: linear-gradient(145deg, rgba(30,27,42,.9), rgba(12,11,18,.92)); overflow: hidden; transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease; }
+.education-card { min-height: 310px; display: grid; grid-template-columns: minmax(180px, .82fr) 1.18fr; border: 1px solid var(--line); background: linear-gradient(145deg, rgba(30,27,42,.9), rgba(12,11,18,.92)); overflow: hidden; transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease; }
 .education-card:hover { transform: translateY(-6px); border-color: rgba(247,201,103,.42); box-shadow: 0 24px 60px rgba(0,0,0,.26); }
 .education-logo { min-height: 100%; display: grid; place-items: center; padding: 1.35rem; background: #fff; border-right: 1px solid var(--line); }
-.education-logo img { display: block; width: 100%; max-width: 170px; max-height: 145px; object-fit: contain; }
+.education-logo img { display: block; width: 100%; max-width: 220px; max-height: 145px; object-fit: contain; }
 .education-content { padding: clamp(1.5rem, 3vw, 2.35rem); }
 .education-meta { display: flex; justify-content: space-between; gap: .75rem; margin-bottom: 1.7rem; color: var(--amber); font: .58rem/1.45 "DM Mono", monospace; letter-spacing: .06em; text-transform: uppercase; }
 .education-card h3 { font-size: clamp(1.55rem, 2.4vw, 2.15rem); }
@@ -146,10 +146,10 @@ a:hover > .arrow { transform: translate(2px, -2px); }
 .timeline-item::before { content: ""; position: absolute; left: 0; bottom: -1px; width: 0; height: 1px; background: linear-gradient(90deg, var(--coral), var(--amber)); transition: width .4s ease; }
 .timeline-item:hover::before { width: 100%; }
 .timeline-number { display: inline-block; margin-bottom: .9rem; color: var(--coral); font: .58rem "DM Mono", monospace; }
-.timeline-title { display: flex; align-items: center; gap: .75rem; margin-bottom: .55rem; }
+.timeline-title { display: flex; align-items: center; gap: .9rem; margin-bottom: .7rem; }
 .timeline-title h3 { margin: 0; }
-.timeline-logo { width: 88px; height: 42px; flex: 0 0 auto; display: grid; place-items: center; padding: .4rem; background: #fff; border-radius: 2px; }
-.timeline-logo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.timeline-logo { width: 168px; height: 64px; flex: 0 0 auto; display: grid; place-items: center; overflow: hidden; padding: .55rem .7rem; background: #fff; border-radius: 2px; }
+.timeline-logo img { display: block; width: 100%; height: 100%; overflow: hidden; object-fit: contain; }
 .timeline-item h3 { font-size: 1.18rem; margin-bottom: .4rem; }
 .timeline-item > div > p:not(.timeline-period):not(.highlight) { color: var(--muted); line-height: 1.72; }
 .timeline-period { color: var(--amber); font: .61rem "DM Mono", monospace; line-height: 1.55; text-transform: uppercase; }

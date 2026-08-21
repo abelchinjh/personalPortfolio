@@ -11,12 +11,12 @@ export const leadership = [
     title: "Generasi Gemilang",
     period: "Volunteer Mentor · 2026 — present",
     description: "Weekly small-group mathematics mentoring for students from low-income communities in Petaling Jaya, alongside technology work for the organisation.",
-    logo: "/brand-assets/generasi-gemilang.png",
+    logo: "/brand-assets/generasi-gemilang-horizontal.png",
   },
   {
     title: "SATS Ltd.",
     period: "Incoming Automation & Innovation Intern · 2026",
-    description: "Joining the Digital Automation & Innovation team to work on practical enterprise automation and operational transformation.",
+    description: "Joining the Digital Automation & Innovation team at Singapore-headquartered SATS, one of the world’s largest air cargo handlers and Asia’s leading airline caterer, to work on practical enterprise automation and operational transformation.",
     logo: null,
   },
   {

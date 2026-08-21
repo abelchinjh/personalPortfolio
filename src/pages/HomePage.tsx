@@ -15,7 +15,7 @@ export default function HomePage() {
         <div className="hero-copy" data-reveal>
           <p className="eyebrow"><span className="eyebrow-dot" /> Computer science · AI · social impact</p>
           <h1 id="intro-title">Building useful systems for the <span>real world.</span></h1>
-          <p className="hero-text">I’m Abel Chin, a Malaysian computer science and business student at SMU, building at the intersection of agentic AI, public-good technology and Malaysia-first compliance infrastructure.</p>
+          <p className="hero-text">I’m Abel Chin, a Malaysian computer science student at SMU, building at the intersection of agentic AI, public-good technology and Malaysia-first compliance infrastructure.</p>
           <div className="hero-actions">
             <Link className="button button-primary" to="/portfolio"><span>Explore selected work</span> <ArrowUpRight /></Link>
             <a className="button button-secondary" href="https://github.com/abelchinjh" target="_blank" rel="noreferrer"><GitHubIcon /> <span>Follow the builds</span></a>

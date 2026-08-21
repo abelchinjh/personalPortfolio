@@ -12,6 +12,19 @@ test("hero omits the three proof stats and MY to SG floating badge", () => {
   assert.doesNotMatch(home, /className="floating-label label-place"/);
 });
 
+test("hero identifies Abel as a computer science student without a business programme claim", () => {
+  const home = read("src/pages/HomePage.tsx");
+  assert.match(home, /Malaysian computer science student at SMU/);
+  assert.doesNotMatch(home, /computer science and business student/);
+});
+
+test("SATS internship copy reflects the company’s verified Singapore and global aviation scale", () => {
+  const leadership = read("src/data/leadership.ts");
+  assert.match(leadership, /Singapore-headquartered SATS/);
+  assert.match(leadership, /one of the world’s largest air cargo handlers/);
+  assert.match(leadership, /Asia’s leading airline caterer/);
+});
+
 test("recognition restores the confirmed legacy 2022 awards", () => {
   const awards = read("src/data/awards.ts");
   assert.match(awards, /Champion/);
@@ -40,20 +53,27 @@ test("education section includes current SMU and prior NUS study", () => {
 test("requested education and organisation logos are local and wired into content", () => {
   const expected = [
     "public/brand-assets/nus.svg",
-    "public/brand-assets/smu.png",
+    "public/brand-assets/smu-horizontal.svg",
     "public/brand-assets/nyala-labs.svg",
-    "public/brand-assets/generasi-gemilang.png",
+    "public/brand-assets/generasi-gemilang-horizontal.png",
     "public/brand-assets/imotorbike.svg",
   ];
   for (const asset of expected) assert.equal(existsSync(resolve(root, asset)), true, `${asset} should exist`);
 
   const education = read("src/data/education.ts");
   const leadership = read("src/data/leadership.ts");
-  assert.match(education, /\/brand-assets\/smu\.png/);
+  assert.match(education, /\/brand-assets\/smu-horizontal\.svg/);
   assert.match(education, /\/brand-assets\/nus\.svg/);
   assert.match(leadership, /\/brand-assets\/nyala-labs\.svg/);
-  assert.match(leadership, /\/brand-assets\/generasi-gemilang\.png/);
+  assert.match(leadership, /\/brand-assets\/generasi-gemilang-horizontal\.png/);
   assert.match(leadership, /\/brand-assets\/imotorbike\.svg/);
+});
+
+test("wide education and organisation marks receive roomy contain-fit logo frames", () => {
+  const styles = read("src/pages/Pages.css");
+  assert.match(styles, /\.education-logo img[^}]*max-width:\s*220px/s);
+  assert.match(styles, /\.timeline-logo[^}]*width:\s*168px[^}]*height:\s*64px/s);
+  assert.match(styles, /\.timeline-logo img[^}]*object-fit:\s*contain/s);
 });
 
 test("work page presents the complete verified 24-project archive", () => {
