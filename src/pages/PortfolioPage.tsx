@@ -8,7 +8,7 @@ export default function PortfolioPage() {
       <header className="work-header" data-reveal>
         <p className="eyebrow"><span className="eyebrow-dot" /> Project archive · 2025—2026</p>
         <h1>Systems made to <span>move.</span></h1>
-        <p>A complete archive of public products, competition builds, team collaborations and open-source experiments across responsible AI, accessibility, compliance, climate finance and community infrastructure.</p>
+        <p>A complete archive of products, competition builds, team collaborations and open-source experiments across responsible AI, accessibility, compliance, climate finance and community infrastructure.</p>
       </header>
 
       <div className="project-list">

@@ -76,12 +76,12 @@ test("wide education and organisation marks receive roomy contain-fit logo frame
   assert.match(styles, /\.timeline-logo img[^}]*object-fit:\s*contain/s);
 });
 
-test("work page presents the complete verified 24-project archive", () => {
+test("work page presents the complete verified 29-project archive", () => {
   const page = read("src/pages/PortfolioPage.tsx");
   const projectData = read("src/data/projects.ts");
   const titleCount = (projectData.match(/^\s+title: "/gm) ?? []).length;
 
-  assert.equal(titleCount, 24);
+  assert.equal(titleCount, 29);
   assert.match(page, /Project archive · 2025—2026/);
   assert.doesNotMatch(page, /Selected work/);
 
@@ -90,6 +90,11 @@ test("work page presents the complete verified 24-project archive", () => {
     "ReliefKaki",
     "AgentLane",
     "Credence CorpSec Command Center",
+    "Atlas Relay",
+    "CatalogGym",
+    "Mandai Go",
+    "Okay Tak Okay",
+    "My Life",
     "AgentProof OS",
     "BorderProof SG",
     "BunkerPilot",
@@ -137,12 +142,19 @@ test("project entries identify their verified hackathon or programme without sta
     "Cursor × Anthropic Hackathon Malaysia 2025",
     "NUS Hack&Roll 2026",
     "Nyala Labs × SunFest 2026",
+    "Alibaba Cloud × Atlas Agentic AI Hackathon",
+    "LifeHack 2026",
+    "AWS Kiro workshop",
+    "ASEAN Data Science Explorers 2026 concept",
+    "Private independent system",
+    "SimplifyNext Agentic AI Hackathon 2026",
   ];
   for (const attribution of requiredAttributions) assert.match(projectData, new RegExp(attribution));
 
   assert.doesNotMatch(projectData, /github\.com\/abelcjh\//);
   assert.doesNotMatch(projectData, /abelcjh\.github\.io/);
   assert.match(projectData, /github\.com\/abelchinjh\/personalPortfolio/);
+  assert.doesNotMatch(projectData, /tail0218a9|kira-hermes-vps|github\.com\/abelchinjh\/my_life/);
 });
 
 test("Vercel serves React Router deep links through the SPA entry point", () => {
