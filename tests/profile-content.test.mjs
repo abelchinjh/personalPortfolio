@@ -157,6 +157,35 @@ test("project entries identify their verified hackathon or programme without sta
   assert.doesNotMatch(projectData, /tail0218a9|kira-hermes-vps|github\.com\/abelchinjh\/my_life/);
 });
 
+test("GOAI recognition preserves the Top 300 development-resource-support scope", () => {
+  const awards = read("src/data/awards.ts");
+  const award = awards.split("\n").find((line) => line.includes("GOAI"));
+  assert.ok(award, "GOAI recognition should exist");
+  assert.match(award, /title: "Top 300"/);
+  assert.match(award, /Agent Infra · Development-resource support/);
+  assert.match(award, /AgentProof OS/);
+  const project = read("src/data/projects.ts").split('title: "AgentProof OS"')[1].split("\n  },")[0];
+  assert.match(project, /Top 300 development-resource support/);
+  assert.doesNotMatch(award + project, /ranked|winner|finalist|RMB|¥200/i);
+});
+
+test("SimplifyNext semi-finalist status appears in recognition and the JalanLens project", () => {
+  const awards = read("src/data/awards.ts");
+  const award = awards.split("\n").find((line) => line.includes("SimplifyNext"));
+  assert.ok(award, "SimplifyNext recognition should exist");
+  assert.match(award, /title: "Semi-finalist"/);
+  assert.match(award, /SimplifyNext Agentic AI Hackathon · Physical AI · JalanLens Live Campus Guide · 2026/);
+  const project = read("src/data/projects.ts").split('title: "JalanLens"')[1].split("\n  },")[0];
+  assert.match(project, /SimplifyNext Agentic AI Hackathon 2026 \(semi-finalist\)/);
+  assert.match(project, /simulated Unitree Go2/);
+});
+
+test("recognition numbering uses two digits even when there are ten entries", () => {
+  const home = read("src/pages/HomePage.tsx");
+  const recognition = home.split('<div className="recognition-list">')[1].split("</section>")[0];
+  assert.match(recognition, /String\(index \+ 1\)\.padStart\(2, "0"\)/);
+});
+
 test("Vercel serves React Router deep links through the SPA entry point", () => {
   const config = JSON.parse(read("vercel.json"));
   assert.deepEqual(config.rewrites, [

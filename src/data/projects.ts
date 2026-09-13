@@ -13,7 +13,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     title: "JalanLens",
-    eyebrow: "Huawei Tech4City Competition 2026 + SimplifyNext Agentic AI Hackathon 2026 · major contributor",
+    eyebrow: "Huawei Tech4City Competition 2026 + SimplifyNext Agentic AI Hackathon 2026 (semi-finalist) · major contributor",
     description: "A Clementi accessibility digital twin combining real imagery, Mapillary street views, public feedback and persona agents, later extended with a safety-gated live campus guide for constraint-compliant routes and simulated Unitree Go2 guidance.",
     tags: ["Geospatial", "Supabase", "Physical AI", "Accessibility"],
     accent: "#f7c967",
@@ -97,7 +97,7 @@ export const projects: Project[] = [
   },
   {
     title: "AgentProof OS",
-    eyebrow: "GOAI Global Open-source AI Challenge · Agent Infra",
+    eyebrow: "GOAI Global Open-source AI Challenge · Agent Infra · Top 300 development-resource support",
     description: "An open-source control plane that makes high-risk multi-agent workflows verifiable through typed handoffs, deterministic checks, human approvals, security audits and tamper-evident execution receipts.",
     tags: ["Python", "Multi-agent systems", "Security", "Evaluation"],
     accent: "#6ed8e7",

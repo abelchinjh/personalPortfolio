@@ -93,7 +93,7 @@ export default function HomePage() {
 
       <section className="section recognition-section" aria-labelledby="recognition">
         <div className="section-heading" data-reveal><p className="eyebrow">04 / Recognition</p><h2 id="recognition">Milestones, with the receipts.</h2></div>
-        <div className="recognition-list">{awards.map((award, index) => <div className="recognition-row" key={award.title} data-reveal><span>0{index + 1}</span><strong>{award.title}</strong><p>{award.detail}</p></div>)}</div>
+        <div className="recognition-list">{awards.map((award, index) => <div className="recognition-row" key={award.title} data-reveal><span>{String(index + 1).padStart(2, "0")}</span><strong>{award.title}</strong><p>{award.detail}</p></div>)}</div>
       </section>
 
       <section className="contact-card" aria-labelledby="contact-title" data-reveal>
