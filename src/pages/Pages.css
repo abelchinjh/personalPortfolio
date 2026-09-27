@@ -13,15 +13,11 @@
 }
 
 body {
-  background:
-    radial-gradient(circle at 7% 10%, rgba(255, 128, 111, .08), transparent 27rem),
-    radial-gradient(circle at 88% 35%, rgba(101, 228, 179, .065), transparent 32rem),
-    radial-gradient(circle at 50% 95%, rgba(181, 154, 255, .07), transparent 33rem),
-    var(--night);
+  background: var(--night);
   color: var(--ink);
 }
 
-.motion-canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -4; pointer-events: none; }
+.motion-canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -4; pointer-events: none; opacity: .2; }
 .pointer-aura { position: fixed; left: var(--pointer-x); top: var(--pointer-y); width: 26rem; height: 26rem; border-radius: 50%; background: radial-gradient(circle, rgba(181, 154, 255, .075), transparent 67%); transform: translate(-50%, -50%); z-index: -3; pointer-events: none; transition: left .12s linear, top .12s linear; }
 .grain { position: fixed; inset: 0; pointer-events: none; z-index: 20; opacity: .035; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E"); }
 .page-shell { width: min(1200px, calc(100% - 64px)); margin: 0 auto; position: relative; }
@@ -45,6 +41,13 @@ body {
 
 .hero-grid { min-height: calc(100vh - 88px); display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(320px, .72fr); gap: clamp(3rem, 7vw, 7rem); align-items: center; padding: 5.5rem 0 6.5rem; }
 .hero-copy { position: relative; z-index: 2; }
+.hero-credential { display: flex; align-items: center; gap: 1rem; margin-bottom: 2.2rem; width: fit-content; max-width: 100%; }
+.credential-logo { display: grid; place-items: center; flex: 0 0 82px; height: 56px; padding: 8px; background: #fff; }
+.credential-logo img { width: 100%; height: 100%; object-fit: contain; }
+.hero-credential strong { display: block; font-size: .9rem; line-height: 1.4; font-weight: 600; }
+.hero-credential > span > span { display: block; margin-top: .35rem; color: var(--amber); font-size: .75rem; line-height: 1.4; }
+.hero-copy h1 { font-size: clamp(3.2rem, 5.6vw, 5.5rem); line-height: 1.05; }
+.hero-copy h1 > span { display: block; color: #d9d3c8; background: none; font-size: .76em; margin-top: .18em; }
 .eyebrow, .work-eyebrow { margin: 0 0 1rem; color: var(--amber); font: 500 .68rem "DM Mono", monospace; letter-spacing: .105em; text-transform: uppercase; }
 .eyebrow { display: flex; align-items: center; gap: .6rem; }
 .eyebrow-dot { width: .45rem; height: .45rem; border-radius: 50%; background: var(--coral); box-shadow: 0 0 1rem rgba(255, 128, 111, .6); }
@@ -60,7 +63,7 @@ h3 { font-size: 1.75rem; margin-bottom: .85rem; }
 .button::before { content: ""; position: absolute; inset: 0; transform: translateX(-110%) skewX(-18deg); width: 60%; background: rgba(255,255,255,.28); transition: transform .45s ease; }
 .button:hover { transform: translateY(-3px); }
 .button:hover::before { transform: translateX(220%) skewX(-18deg); }
-.button-primary { color: #0b0910; background: linear-gradient(100deg, var(--amber), #ffad75 48%, var(--coral)); box-shadow: 0 12px 35px rgba(255, 128, 111, .16); }
+.button-primary { color: #0b0910; background: var(--amber); box-shadow: none; }
 .button-primary:hover { box-shadow: 0 16px 44px rgba(255, 128, 111, .25); }
 .button-secondary { border-color: var(--line-strong); color: var(--ink); backdrop-filter: blur(8px); }
 .button-secondary:hover { border-color: rgba(181,154,255,.6); color: #fff; }
@@ -70,7 +73,7 @@ h3 { font-size: 1.75rem; margin-bottom: .85rem; }
 a:hover > .arrow { transform: translate(2px, -2px); }
 .portrait-stage { position: relative; min-height: 545px; display: grid; place-items: center; perspective: 900px; }
 .profile-card { position: relative; z-index: 2; width: min(360px, 90%); border: 1px solid rgba(247, 201, 103, .23); background: linear-gradient(155deg, rgba(28, 24, 39, .92), rgba(13, 12, 20, .75)); padding: 11px; box-shadow: 24px 34px 90px rgba(0,0,0,.35); transform: rotate(2.2deg); transition: transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .5s ease; }
-.profile-card::before { content: ""; position: absolute; inset: -1px; z-index: -1; opacity: .45; background: linear-gradient(125deg, var(--coral), transparent 28%, transparent 70%, var(--mint)); }
+.profile-card::before { content: ""; position: absolute; inset: -1px; z-index: -1; opacity: .15; background: var(--amber); }
 .profile-card:hover { transform: rotate(0deg) translateY(-8px); box-shadow: 24px 44px 100px rgba(0,0,0,.5); }
 .photo-frame { position: relative; overflow: hidden; }
 .photo-frame::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 -70px 70px rgba(10,9,16,.18); pointer-events: none; }
@@ -105,7 +108,13 @@ a:hover > .arrow { transform: translate(2px, -2px); }
 .text-link { display: inline-flex; align-items: center; gap: .35rem; color: var(--amber); font-size: .82rem; font-weight: 800; }
 .education-section { border-bottom: 1px solid var(--line); }
 .education-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 3.8rem; }
-.education-card { min-height: 310px; display: grid; grid-template-columns: minmax(180px, .82fr) 1.18fr; border: 1px solid var(--line); background: linear-gradient(145deg, rgba(30,27,42,.9), rgba(12,11,18,.92)); overflow: hidden; transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease; }
+.education-card { min-height: 310px; display: grid; border: 1px solid var(--line); background: #141419; overflow: hidden; transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease; }
+.education-primary { grid-column: 1 / -1; grid-template-columns: minmax(180px, .5fr) 1.5fr; }
+.education-school { grid-template-columns: 1fr; }
+.education-scholarship { margin-top: 1.5rem; padding-top: 1.2rem; border-top: 1px solid var(--line); }
+.education-scholarship strong { color: var(--amber); font-size: .82rem; line-height: 1.5; }
+.education-scholarship p { margin: .5rem 0 0; color: var(--muted); font-size: .8rem; line-height: 1.6; }
+.education-section .section-note { max-width: 620px; }
 .education-card:hover { transform: translateY(-6px); border-color: rgba(247,201,103,.42); box-shadow: 0 24px 60px rgba(0,0,0,.26); }
 .education-logo { min-height: 100%; display: grid; place-items: center; padding: 1.35rem; background: #fff; border-right: 1px solid var(--line); }
 .education-logo img { display: block; width: 100%; max-width: 220px; max-height: 145px; object-fit: contain; }

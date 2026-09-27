@@ -12,17 +12,26 @@ test("hero omits the three proof stats and MY to SG floating badge", () => {
   assert.doesNotMatch(home, /className="floating-label label-place"/);
 });
 
-test("hero identifies Abel as a computer science student without a business programme claim", () => {
+test("hero leads with prior NUS study and an accurate independent identity", () => {
   const home = read("src/pages/HomePage.tsx");
-  assert.match(home, /Malaysian computer science student at SMU/);
-  assert.doesNotMatch(home, /computer science and business student/);
+  const hero = home.split('<section className="hero-grid"')[1].split("</section>")[0];
+  assert.match(hero, /National University of Singapore/);
+  assert.match(hero, /Former student · ASEAN scholar/);
+  assert.match(hero, /Computer Engineering and Computer Science at NUS/);
+  assert.match(hero, /AI systems builder/);
+  assert.ok(hero.indexOf("National University of Singapore") < hero.indexOf('<h1'));
+  assert.doesNotMatch(hero, /SMU|Singapore Management|Currently|graduate|alumnus/);
 });
 
-test("SATS internship copy reflects the company’s verified Singapore and global aviation scale", () => {
+test("experience omits SATS and closes Nyala in September 2026", () => {
   const leadership = read("src/data/leadership.ts");
-  assert.match(leadership, /Singapore-headquartered SATS/);
-  assert.match(leadership, /one of the world’s largest air cargo handlers/);
-  assert.match(leadership, /Asia’s leading airline caterer/);
+  assert.doesNotMatch(leadership, /SATS|Incoming/);
+  const nyala = leadership.split('title: "Nyala Labs"')[1].split("\n  },")[0];
+  assert.match(nyala, /Oct 2025 – Sep 2026/);
+  assert.match(nyala, /Founded and led/);
+  assert.doesNotMatch(nyala, /present|Currently/);
+  assert.match(leadership, /Generasi Gemilang/);
+  assert.match(leadership, /iMotorbike/);
 });
 
 test("recognition restores the confirmed legacy 2022 awards", () => {
@@ -31,29 +40,45 @@ test("recognition restores the confirmed legacy 2022 awards", () => {
   assert.match(awards, /UNLEASH Hacks Singapore/);
   assert.match(awards, /Finalist/);
   assert.match(awards, /GGEF SDG Open Hack Singapore/);
-  assert.equal((awards.match(/2022/g) ?? []).length, 2);
+  assert.match(awards, /UNLEASH Hacks Singapore[^\n]*2022/);
+  assert.match(awards, /GGEF SDG Open Hack Singapore[^\n]*2022/);
 });
 
-test("education section includes current SMU and prior NUS study", () => {
+test("education presents NUS honestly and retains both Victoria schools and scholarships", () => {
   const home = read("src/pages/HomePage.tsx");
   const education = read("src/data/education.ts");
   assert.match(home, /Education/);
   assert.match(home, /education\.map/);
-  assert.match(education, /Singapore Management University/);
-  assert.match(education, /Bachelor of Science in Computer Science/);
-  assert.match(education, /Aug 2026/);
-  assert.match(education, /SMU ASEAN Undergraduate Scholarship/);
   assert.match(education, /National University of Singapore/);
-  assert.match(education, /B\.Comp\. \(Hons\.\) Computer Science/);
-  assert.match(education, /Jul 2022/);
-  assert.match(education, /Jan 2023/);
+  assert.match(education, /Computer Engineering & Computer Science/);
+  assert.match(education, /left after one semester without completing the degree/);
   assert.match(education, /pioneer batch of NUS College/);
+  assert.match(education, /NUS ASEAN Undergraduate Merit Scholarship/);
+  assert.match(education, /Victoria Junior College/);
+  assert.match(education, /Victoria School/);
+  assert.match(education, /Singapore-Cambridge GCE A-Level/);
+  assert.match(education, /Singapore-Cambridge GCE O-Level/);
+  assert.equal((education.match(/MOE Singapore ASEAN Scholarship/g) ?? []).length, 2);
+  assert.doesNotMatch(education, /SMU|Singapore Management|B\.Comp|Bachelor/);
+});
+
+test("public biography and metadata remove SMU and SATS while retaining scholarship history", () => {
+  const paths = ["src/pages/HomePage.tsx", "src/data/education.ts", "src/data/leadership.ts", "src/data/awards.ts", "index.html"];
+  for (const path of paths) assert.doesNotMatch(read(path), /\bSMU\b|Singapore Management|\bSATS\b/, path);
+  const awards = read("src/data/awards.ts");
+  assert.match(awards, /NUS ASEAN Undergraduate Merit Scholarship/);
+  assert.match(awards, /MOE Singapore ASEAN Scholarship/);
+  assert.match(awards, /Victoria School & Victoria Junior College · 2018–2021/);
+  assert.match(awards, /after Tuition Grant/);
+  const html = read("index.html");
+  assert.match(html, /former National University of Singapore student/);
+  assert.doesNotMatch(html, /business student|Malaysia-first/);
 });
 
 test("requested education and organisation logos are local and wired into content", () => {
   const expected = [
     "public/brand-assets/nus.svg",
-    "public/brand-assets/smu-horizontal.svg",
+
     "public/brand-assets/nyala-labs.svg",
     "public/brand-assets/generasi-gemilang-horizontal.png",
     "public/brand-assets/imotorbike.svg",
@@ -62,7 +87,6 @@ test("requested education and organisation logos are local and wired into conten
 
   const education = read("src/data/education.ts");
   const leadership = read("src/data/leadership.ts");
-  assert.match(education, /\/brand-assets\/smu-horizontal\.svg/);
   assert.match(education, /\/brand-assets\/nus\.svg/);
   assert.match(leadership, /\/brand-assets\/nyala-labs\.svg/);
   assert.match(leadership, /\/brand-assets\/generasi-gemilang-horizontal\.png/);
