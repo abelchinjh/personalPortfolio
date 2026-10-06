@@ -272,12 +272,12 @@ export const projects: Project[] = [
   },
   {
     title: "Personal Portfolio",
-    eyebrow: "Independent build · abelchin.my",
+    eyebrow: "Independent build · www.abelchinjh.com",
     description: "This site: a fast, responsive personal archive for projects, leadership, recognition and education, built with a calm editorial interface and automated deployment.",
     tags: ["React", "TypeScript", "Vite", "Vercel"],
     accent: "#b59aff",
     repoUrl: "https://github.com/abelchinjh/personalPortfolio",
-    liveUrl: "https://abelchin.my/",
+    liveUrl: "https://www.abelchinjh.com/",
     liveLabel: "Open site",
   },
 ];
