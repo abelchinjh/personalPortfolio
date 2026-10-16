@@ -90,7 +90,7 @@ export default function HomePage() {
         <p className="eyebrow">Get in touch</p>
         <h2 id="contact-title">Have a problem worth working on?</h2>
         <p>I’m interested in applied AI, accessibility and software that helps people do their work.</p>
-        <div className="hero-actions"><a className="button button-primary" href="mailto:abelchinjh@gmail.com"><span>Email Abel</span> <ArrowUpRight /></a><a className="button button-secondary" href="https://linkedin.com/in/abelchinjh" target="_blank" rel="noreferrer"><span>Connect on LinkedIn</span> <ArrowUpRight /></a></div>
+        <div className="hero-actions"><a className="button button-primary" href="mailto:hello@abelchinjh.com"><span>Email Abel</span> <ArrowUpRight /></a><a className="button button-secondary" href="https://github.com/abelchinjh" target="_blank" rel="noreferrer"><span>GitHub</span> <ArrowUpRight /></a><a className="button button-secondary" href="https://x.com/@abelchinjh" target="_blank" rel="noreferrer"><span>X</span> <ArrowUpRight /></a><a className="button button-secondary" href="https://discordapp.com/users/1334801780273315870" target="_blank" rel="noreferrer"><span>Discord</span> <ArrowUpRight /></a></div>
       </section>
 
       <footer className="footer"><span>© {new Date().getFullYear()} Abel Chin</span><span>Independent work · Malaysia</span></footer>

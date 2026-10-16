@@ -50,7 +50,7 @@ function Layout() {
           <div className="nav-links">
             <NavLink to="/" end>Home</NavLink>
             <NavLink to="/portfolio">Work</NavLink>
-            <a href="https://linkedin.com/in/abelchinjh" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+            <a href="https://github.com/abelchinjh" target="_blank" rel="noreferrer">GitHub ↗</a>
           </div>
           <span className="availability"><i /> Building in public</span>
         </nav>

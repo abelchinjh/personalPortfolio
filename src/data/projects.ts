@@ -210,7 +210,6 @@ export const projects: Project[] = [
     tags: ["Vite", "React", "TypeScript", "Supabase"],
     accent: "#ff806f",
     repoUrl: "https://github.com/abelchinjh/uni-ally-mate",
-    liveUrl: "https://www.linkedin.com/posts/abelchinjh_sat-oct-18-uob-plaza-1-kl-had-a-blast-with-activity-7385240223443644416-VqB1",
     liveLabel: "View post",
   },
   {
