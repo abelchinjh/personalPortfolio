@@ -1,17 +1,20 @@
-import test from "node:test";
-import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
-const read = (p) => readFileSync(new URL("../" + p, import.meta.url), "utf8");
-test("initial HTML is static, with explicit user motion activation", () => {
-  const html = read("dist/index.html");
-  assert.match(html, /aria-pressed="false"/);
-  assert.match(html, /Play light motion/);
-  assert.doesNotMatch(html, /<video|class="hero motion-on"/);
-  assert.match(read("src/index.css"), /prefers-reduced-motion:\s*reduce/);
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
+test('static scene fallback is honest and readable without JavaScript',()=>{
+ const html=read('dist/index.html');
+ assert.equal((html.match(/motion film pending/gi)||[]).length,2);
+ assert.doesNotMatch(html,/<video|Play light motion|light-sweep/);
+ assert.match(html,/Liquid Lens/);
+ assert.match(read('src/index.css'),/prefers-reduced-motion:\s*reduce/);
+ assert.match(html,/Scoped mandate/);assert.match(html,/Authoritative quote/);
+ assert.match(html,/Payment evidence/);assert.match(html,/Exactly-once order/);
 });
-test("search is labeled and result updates have an accessible status", () => {
-  const html = read("dist/portfolio/index.html");
-  assert.match(html, /<label for="project-search">Search projects/);
-  assert.match(html, /role="status"/);
-  assert.match(html, /29<!-- --> of <!-- -->29/);
+test('archive counts are correct before client enhancement',()=>{
+ const html=read('dist/index.html');
+ for(const value of [26,23,4]) assert.ok(html.includes(`data-counter-target="${value}"`));
+ const archive=read('dist/portfolio/index.html');
+ assert.match(archive,/<label for="project-search">Search projects/);
+ assert.match(archive,/role="status"/);assert.match(archive,/26<!-- --> of <!-- -->26/);
 });

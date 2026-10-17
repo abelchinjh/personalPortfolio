@@ -1,7 +1,13 @@
+import { useEffect } from "react";
+import { useMotionAllowed } from "./useMotionAllowed";
 import HomePage from "./pages/HomePage";
 import PortfolioPage from "./pages/PortfolioPage";
 import "./pages/Pages.css";
 export default function App({ route = "/" }: { route?: string }) {
+  const motionAllowed = useMotionAllowed();
+  useEffect(() => {
+    document.documentElement.dataset.motion = motionAllowed ? "on" : "off";
+  }, [motionAllowed]);
   return (
     <>
       <a className="skip-link" href="#main">
@@ -27,7 +33,7 @@ export default function App({ route = "/" }: { route?: string }) {
       )}
       <footer className="footer">
         <span>© {new Date().getFullYear()} Abel Chin</span>
-        <span>Independent work · Malaysia</span>
+
       </footer>
     </>
   );

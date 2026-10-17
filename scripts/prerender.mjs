@@ -14,8 +14,8 @@ try {
     const output = template
       .replace('<div id="root"></div>', `<div id="root">${html}</div>`)
       .replace(
-        "<title>Abel Chin — Technical Founder</title>",
-        `<title>${route === "/" ? "Abel Chin — Technical Founder" : "Work — Abel Chin"}</title>`,
+        "<title>Abel Chin — Founder</title>",
+        `<title>${route === "/" ? "Abel Chin — Founder" : "Work — Abel Chin"}</title>`,
       )
       .replace(
         'href="https://www.abelchinjh.com"',

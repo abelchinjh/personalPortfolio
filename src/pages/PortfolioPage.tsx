@@ -11,7 +11,7 @@ export default function PortfolioPage() {
   return (
     <main id="main" tabIndex={-1} className="work-page">
       <header className="work-header section">
-        <p className="eyebrow">PUBLIC PORTFOLIO / 29 ENTRIES</p>
+        <p className="eyebrow">PUBLIC PORTFOLIO / {projects.length} ENTRIES</p>
         <h1>
           Work<span className="blue">.</span>
         </h1>
@@ -19,10 +19,6 @@ export default function PortfolioPage() {
           Projects, prototypes and collaborations,
           <br />
           with their original context.
-        </p>
-        <p>
-          This archive documents my public work. I’m currently building in
-          stealth.
         </p>
       </header>
       <section className="section archive" aria-label="Project archive">
