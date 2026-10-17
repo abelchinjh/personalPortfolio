@@ -7,7 +7,7 @@ test("initial HTML is static, with explicit user motion activation", () => {
   assert.match(html, /aria-pressed="false"/);
   assert.match(html, /Play light motion/);
   assert.doesNotMatch(html, /<video|class="hero motion-on"/);
-  assert.match(read("src/index.css"), /prefers-reduced-motion:reduce/);
+  assert.match(read("src/index.css"), /prefers-reduced-motion:\s*reduce/);
 });
 test("search is labeled and result updates have an accessible status", () => {
   const html = read("dist/portfolio/index.html");
