@@ -1,0 +1,11 @@
+# Liquid Lens local 3D films
+
+Original code-authored orthographic 3D scenes, rendered with Chromium WebGL2 (SwiftShader in this environment) and encoded with installed FFmpeg. No external generation API, image-to-video service, stock footage, or new package installation is used. These are stylized glass interpretations of the approved mint/peach Liquid Lens direction; they are not the rejected Firefly clip or a pixel-identical animation of the approved ImageGen stills.
+
+The fragment shader sphere-traces fixed asymmetric ellipsoid/smooth-union geometry, estimates surface normals, traces entry and exit refraction, and samples a procedural environment with Fresnel reflections. Object motion is periodic and bounded. It is an art-directed optical approximation, not a physically calibrated path tracer. The camera is fixed. Hero and middle have different compositions; portrait renders use a separate framing transform, not a crop of the desktop file.
+
+Each loop is 144 frames / 24 fps = 6 seconds. Phase is frame/144 × 2π. Frame 144 equals frame 0 mathematically; the encoded loop uses frames 0–143. H.264 MP4 uses yuv420p and faststart; VP9 WebM is the first source. No audio tracks. The website ships only compressed assets, not WebGL rendering work.
+
+For reproduction, serve the built dist directory locally, copy scene.html to dist/liquid-render.html, launch an isolated installed Chromium with remote debugging port 9224 and a disposable profile, then run `node tools/liquid-lens/render.mjs` from the repository. The renderer only opens its own localhost scene and writes frames under the workspace outputs directory. Encode using FFmpeg at 24 fps, libx264 CRF 23/preset slow/faststart or libvpx-vp9 CRF 31/cpu-used 4. Posters are frame zero encoded as WebP quality 90. No dependency installation is required.
+
+The React SceneMedia component attaches video sources only when motion/data preferences allow playback and the scene is close to the viewport. Each animation has a pause/play control, pauses offscreen and in hidden tabs, and retains a matching poster if loading or autoplay fails. Reduced-motion and save-data clients render the poster without attaching video sources. Videos and decorative posters are hidden from screen readers; controls remain labelled.
