@@ -1,99 +1,10 @@
-import type { CSSProperties } from "react";
-import { Link } from "react-router-dom";
-import { ArrowUpRight, GitHubIcon } from "../components";
+import Hero from "../Hero";
+import Contact from "../Contact";
 import { projects } from "../data/projects";
-import { awards } from "../data/awards";
 import { education } from "../data/education";
 import { leadership } from "../data/leadership";
-
+import { awards } from "../data/awards";
+const descriptions = ["An accessibility digital twin combining street imagery, public feedback and persona agents, with a later campus-guide extension.","A mobile prototype connecting male caregivers with eligible student volunteers for small, bounded, non-clinical tasks.","A merchant gateway for AI customers, built around scoped permissions, payment evidence and auditable order creation.","A hackathon workflow cockpit for corporate-secretarial deadlines, reminders and reviewable evidence."];
 export default function HomePage() {
-  const featured = projects.filter((project) => project.featured);
-
-  return (
-    <main>
-      <section className="hero-grid" aria-labelledby="intro-title">
-        <div className="hero-copy" data-reveal>
-          <a className="hero-credential" href="#education-title">
-            <span className="credential-logo"><img src="/brand-assets/nus.svg" alt="" aria-hidden="true" /></span>
-            <span><strong>National University of Singapore</strong><span>Former student · ASEAN scholar</span></span>
-          </a>
-          <h1 id="intro-title">Abel Chin.<span>AI systems builder.</span></h1>
-          <p className="hero-text">I studied Computer Engineering and Computer Science at NUS. My work now spans agentic software, accessible navigation and tools for community organisations.</p>
-          <div className="hero-actions">
-            <Link className="button button-primary" to="/portfolio"><span>Explore selected work</span> <ArrowUpRight /></Link>
-            <a className="button button-secondary" href="https://github.com/abelchinjh" target="_blank" rel="noreferrer"><GitHubIcon /> <span>GitHub</span></a>
-          </div>
-        </div>
-
-        <div className="portrait-stage" data-reveal>
-          <aside className="profile-card">
-            <div className="photo-frame"><img src="/AbelChinPhoto20260321.jpg" alt="Abel Chin" /></div>
-            <div className="profile-grid">
-              <div className="profile-meta"><span>Based in</span><strong>Malaysia</strong></div>
-              <div className="profile-meta"><span>Practice</span><strong>AI & applied software</strong></div>
-            </div>
-          </aside>
-        </div>
-      </section>
-
-      <section className="section education-section" aria-labelledby="education-title">
-        <div className="section-heading" data-reveal><p className="eyebrow">01 / Education</p><h2 id="education-title" tabIndex={-1}>A Singapore education.<br />An independent path.</h2><p className="section-note">From Victoria School and Victoria Junior College to a semester at NUS, supported by ASEAN scholarships.</p></div>
-        <div className="education-grid">
-          {education.map((item) => (
-            <article className={`education-card ${item.shortName === "NUS" ? "education-primary" : "education-school"}`} key={item.shortName} data-reveal>
-              {item.logo && <a className="education-logo" href={item.url} target="_blank" rel="noreferrer" aria-label={`Visit ${item.institution}`}>
-                <img src={item.logo} alt={`${item.institution} logo`} />
-              </a>}
-              <div className="education-content">
-                <div className="education-meta"><span>{item.status}</span><span>{item.period}</span></div>
-                <h3><a href={item.url} target="_blank" rel="noreferrer">{item.institution}</a></h3>
-                <p className="education-programme">{item.programme}</p>
-                <p>{item.detail}</p>
-                <div className="education-scholarship"><strong>{item.scholarship}</strong><p>{item.scholarshipDetail}</p></div>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section" aria-labelledby="featured-work">
-        <div className="section-heading" data-reveal><p className="eyebrow">02 / Selected work</p><h2 id="featured-work">Software, put to work.</h2><Link to="/portfolio" className="text-link">See all projects <ArrowUpRight /></Link></div>
-        <div className="featured-grid">
-          {featured.map((project, index) => (
-            <article className={`work-card card-${index + 1}`} style={{ "--card-accent": project.accent } as CSSProperties} key={project.title} data-reveal>
-              <div className="card-topline"><p className="card-index">0{index + 1}</p><span className="card-spark" aria-hidden="true">✦</span></div>
-              <p className="work-eyebrow">{project.eyebrow}</p>
-              <h3>{project.title}</h3>
-              <p>{project.description}</p>
-              <div className="tag-list">{project.tags.slice(0, 3).map((tag) => <span key={tag}>{tag}</span>)}</div>
-              <div className="card-actions">
-                <a className="card-link" href={project.repoUrl} target="_blank" rel="noreferrer">View source <ArrowUpRight /></a>
-                {project.liveUrl && <a className="card-link muted-link" href={project.liveUrl} target="_blank" rel="noreferrer">{project.liveLabel ?? "Open live"} <ArrowUpRight /></a>}
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section split-section" aria-labelledby="community-work">
-        <div className="section-heading sticky-heading" data-reveal><p className="eyebrow">03 / Experience & community</p><h2 id="community-work">Beyond the code.</h2><p className="section-note">AI education, volunteer mentoring and business intelligence.</p></div>
-        <div className="timeline">{leadership.map((item, index) => <article className="timeline-item" key={item.title} data-reveal><div><span className="timeline-number">0{index + 1}</span><div className="timeline-title">{item.logo && <span className="timeline-logo"><img src={item.logo} alt="" aria-hidden="true" /></span>}<h3>{item.title}</h3></div><p className="timeline-period">{item.period}</p></div><div><p>{item.description}</p>{item.highlight && <p className="highlight">{item.highlight}</p>}{item.url && <a className="text-link" href={item.url} target="_blank" rel="noreferrer">Explore Nyala Labs <ArrowUpRight /></a>}</div></article>)}</div>
-      </section>
-
-      <section className="section recognition-section" aria-labelledby="recognition">
-        <div className="section-heading" data-reveal><p className="eyebrow">04 / Recognition</p><h2 id="recognition">Scholarships & recognition.</h2></div>
-        <div className="recognition-list">{awards.map((award, index) => <div className="recognition-row" key={award.title} data-reveal><span>{String(index + 1).padStart(2, "0")}</span><strong>{award.title}</strong><p>{award.detail}</p></div>)}</div>
-      </section>
-
-      <section className="contact-card" aria-labelledby="contact-title" data-reveal>
-        <div className="contact-motif" aria-hidden="true"><i /><i /><i /></div>
-        <p className="eyebrow">Get in touch</p>
-        <h2 id="contact-title">Have a problem worth working on?</h2>
-        <p>I’m interested in applied AI, accessibility and software that helps people do their work.</p>
-        <div className="hero-actions"><a className="button button-primary" href="mailto:hello@abelchinjh.com"><span>Email Abel</span> <ArrowUpRight /></a><a className="button button-secondary" href="https://github.com/abelchinjh" target="_blank" rel="noreferrer"><span>GitHub</span> <ArrowUpRight /></a><a className="button button-secondary" href="https://x.com/@abelchinjh" target="_blank" rel="noreferrer"><span>X</span> <ArrowUpRight /></a><a className="button button-secondary" href="https://discordapp.com/users/1334801780273315870" target="_blank" rel="noreferrer"><span>Discord</span> <ArrowUpRight /></a></div>
-      </section>
-
-      <footer className="footer"><span>© {new Date().getFullYear()} Abel Chin</span><span>Independent work · Malaysia</span></footer>
-    </main>
-  );
+  return <main id="main"><Hero /><section id="selected" className="section selected" aria-labelledby="selected-title"><div className="section-heading"><div><p className="eyebrow">01 / PORTFOLIO HISTORY</p><h2 id="selected-title">Selected work<span className="blue">.</span></h2><p>Projects from my public portfolio.</p></div><a className="text-link" href="/portfolio">Explore all 29 projects <span aria-hidden="true">↗</span></a></div><div className="featured-list">{projects.filter(p => p.featured).map((p,i) => <article className="featured" key={p.title}><div className="project-index">0{i+1}<span aria-hidden="true">/</span></div><div className="featured-body"><p className="project-context">{p.eyebrow}</p><h3>{p.title}</h3><p className="project-description">{descriptions[i]}</p><div className="tag-list">{p.tags.slice(0,3).map(t => <span key={t}>{t}</span>)}</div><div className="project-links"><a href={p.repoUrl} target="_blank" rel="noreferrer">View source ↗</a>{p.liveUrl && <a href={p.liveUrl} target="_blank" rel="noreferrer">{p.liveLabel ?? "Open demo"} ↗</a>}</div></div></article>)}</div><p className="archive-note">Public projects, with their original context. These do not identify my current venture.</p></section><section id="background" className="section background" aria-labelledby="background-title"><div className="background-intro"><div><p className="eyebrow">02 / THE PATH SO FAR</p><h2 id="background-title">Background<span className="blue">.</span></h2><p className="lead">I’m Abel, a technical founder building in stealth.</p><p>My public portfolio brings together software projects, collaborations and competition work from my path so far.</p></div><img className="portrait" src="/images/portrait-560.webp" srcSet="/images/portrait-280.webp 280w, /images/portrait-560.webp 560w" sizes="(max-width: 640px) 180px, 240px" width="240" height="300" loading="lazy" alt="Abel Chin" /></div><div className="background-columns"><div><h3>Education & scholarships</h3>{education.map(e => <article className="education-entry" key={e.shortName}><p className="eyebrow">{e.period}</p><h4>{e.institution}</h4><p>{e.programme}</p><p className="scholarship">{e.scholarship}</p><details><summary>Education details</summary><p>{e.detail}</p><p>{e.scholarshipDetail}</p></details></article>)}</div><div><h3>Experience</h3>{[leadership[2],leadership[0],leadership[1]].map(e => <article className="experience-entry" key={e.title}><h4>{e.title}</h4><p className="project-context">{e.period}</p><p>{e.description}</p>{e.highlight && <p>{e.highlight}</p>}</article>)}</div></div></section><section className="section recognition" aria-labelledby="recognition-title"><p className="eyebrow">03 / PUBLIC RECORD</p><h2 id="recognition-title">Selected recognition<span className="blue">.</span></h2><div className="award-list">{awards.slice(2,6).map(a => <article key={a.title}><h3>{a.title}</h3><p>{a.detail}</p></article>)}</div><details className="all-recognition"><summary>View all recognition</summary>{awards.slice(6).map(a => <article key={a.title}><h3>{a.title}</h3><p>{a.detail}</p></article>)}</details></section><Contact /></main>;
 }

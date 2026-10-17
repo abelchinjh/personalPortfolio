@@ -1,46 +1,17 @@
-import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
-import test from "node:test";
-
-const motionSource = readFileSync(new URL("../src/MotionLayer.tsx", import.meta.url), "utf8");
-const pagesCss = readFileSync(new URL("../src/pages/Pages.css", import.meta.url), "utf8");
-
-test("canvas reacts to reduced-motion preference changes after mount", () => {
-  assert.match(motionSource, /addEventListener\("change",\s*onReducedMotionChange\)/);
-  assert.match(motionSource, /removeEventListener\("change",\s*onReducedMotionChange\)/);
-
-  const handler = motionSource.match(
-    /const onReducedMotionChange = \(event: MediaQueryListEvent\) => \{([\s\S]*?)\n    \};/,
-  )?.[1];
-  assert.ok(handler, "reduced-motion change handler should exist");
-  assert.match(handler, /reducedMotion = event\.matches/);
-  assert.match(handler, /cancelAnimationFrame\(frame\)/);
-  assert.match(handler, /draw\(\)/);
-
-  const resizeHandler = motionSource.match(/const resize = \(\) => \{([\s\S]*?)\n    \};/)?.[1];
-  assert.ok(resizeHandler, "resize handler should exist");
-  assert.match(resizeHandler, /if \(reducedMotion\) draw\(\)/);
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+const read = p => readFileSync(new URL('../'+p,import.meta.url),'utf8');
+test('initial HTML is static, with explicit user motion activation',()=>{
+ const html=read('dist/index.html');
+ assert.match(html,/aria-pressed="false"/);
+ assert.match(html,/Play light motion/);
+ assert.doesNotMatch(html,/<video|class="hero motion-on"/);
+ assert.match(read('src/index.css'),/prefers-reduced-motion:reduce/);
 });
-
-test("contact motif rotates without replacing its vertical centering transform", () => {
-  assert.match(pagesCss, /\.contact-motif\s*\{[^}]*animation:\s*contact-orbit-spin/s);
-  assert.match(
-    pagesCss,
-    /@keyframes\s+contact-orbit-spin\s*\{[^}]*translateY\(-50%\)[^}]*\}[^}]*translateY\(-50%\)/s,
-  );
-});
-
-test("revealed offset cards retain hover motion on desktop and mobile", () => {
-  assert.match(
-    pagesCss,
-    /\.card-1\[data-reveal\]\.is-visible:hover\s*\{[^}]*translateY\(calc\(1\.8rem - 8px\)\)[^}]*rotate\(\.25deg\)/s,
-  );
-  assert.match(
-    pagesCss,
-    /\.card-4\[data-reveal\]\.is-visible:hover\s*\{[^}]*translateY\(calc\(-1\.8rem - 8px\)\)[^}]*rotate\(\.25deg\)/s,
-  );
-  assert.match(
-    pagesCss,
-    /@media \(max-width: 720px\)[\s\S]*\.card-1\[data-reveal\]\.is-visible:hover[^}]*transform:\s*translateY\(-5px\)/s,
-  );
+test('search is labeled and result updates have an accessible status',()=>{
+ const html=read('dist/portfolio/index.html');
+ assert.match(html,/<label for="project-search">Search projects/);
+ assert.match(html,/role="status"/);
+ assert.match(html,/29<!-- --> of <!-- -->29/);
 });

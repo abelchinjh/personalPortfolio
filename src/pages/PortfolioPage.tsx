@@ -1,39 +1,8 @@
-import type { CSSProperties } from "react";
-import { ArrowUpRight } from "../components";
+import { useState } from "react";
 import { projects } from "../data/projects";
-
+import Contact from "../Contact";
 export default function PortfolioPage() {
-  return (
-    <main className="work-page">
-      <header className="work-header" data-reveal>
-        <p className="eyebrow"><span className="eyebrow-dot" /> Project archive · 2025—2026</p>
-        <h1>Systems made to <span>move.</span></h1>
-        <p>A complete archive of products, competition builds, team collaborations and open-source experiments across responsible AI, accessibility, compliance, climate finance and community infrastructure.</p>
-      </header>
-
-      <div className="project-list">
-        {projects.map((project, index) => (
-          <article className="project-row" style={{ "--card-accent": project.accent } as CSSProperties} key={project.title} data-reveal>
-            <span className="project-number">{String(index + 1).padStart(2, "0")}</span>
-            <div className="project-details">
-              <p className="work-eyebrow">{project.eyebrow}</p>
-              <h2>{project.title}</h2>
-              <p>{project.description}</p>
-              <div className="tag-list">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
-            </div>
-            <div className="project-actions">
-              {project.liveUrl && <a className="button button-primary compact-button" href={project.liveUrl} target="_blank" rel="noreferrer"><span>{project.liveLabel ?? "Open project"}</span> <ArrowUpRight /></a>}
-              {project.repoUrl && <a className="button button-secondary compact-button" href={project.repoUrl} target="_blank" rel="noreferrer"><span>GitHub</span> <ArrowUpRight /></a>}
-            </div>
-          </article>
-        ))}
-      </div>
-
-      <section className="contact-card portfolio-contact" data-reveal>
-        <p className="eyebrow">The work continues</p>
-        <h2>Follow the builds as they become real.</h2>
-        <div className="hero-actions"><a className="button button-primary" href="https://github.com/abelchinjh" target="_blank" rel="noreferrer"><span>Explore GitHub</span> <ArrowUpRight /></a><a className="button button-secondary" href="mailto:hello@abelchinjh.com"><span>Start a conversation</span> <ArrowUpRight /></a></div>
-      </section>
-    </main>
-  );
+  const [query,setQuery] = useState("");
+  const filtered = projects.filter(p => `${p.title} ${p.description} ${p.tags.join(" ")}`.toLowerCase().includes(query.toLowerCase()));
+  return <main id="main" className="work-page"><header className="work-header section"><p className="eyebrow">PUBLIC PORTFOLIO / 29 ENTRIES</p><h1>Work<span className="blue">.</span></h1><p className="lead">Projects, prototypes and collaborations,<br />with their original context.</p><p>This archive documents my public work. I’m currently building in stealth.</p></header><section className="section archive" aria-label="Project archive"><div className="search-bar"><label htmlFor="project-search">Search projects</label><div><input id="project-search" type="search" value={query} onChange={e=>setQuery(e.target.value)} placeholder="Title, technology or topic" />{query && <button onClick={()=>setQuery("")}>Clear search</button>}</div><p role="status">{filtered.length} of {projects.length} projects</p></div><div className="project-list">{filtered.map(p => <article className="project-row" key={p.title}><span className="project-number">{String(projects.indexOf(p)+1).padStart(2,"0")}</span><div className="project-details"><p className="project-context">{p.eyebrow}</p><h2>{p.title}</h2><p>{p.description}</p><div className="tag-list">{p.tags.map(t => <span key={t}>{t}</span>)}</div>{p.title === "UniFriend" && <div className="project-gallery">{[1,2,3].map(n => <a key={n} href={`/UniFriend${n}.png`} target="_blank" rel="noreferrer" aria-label={`Open original UniFriend screenshot ${n}`}><img src={`/images/unifriend-${n}.webp`} width="440" height="280" loading="lazy" alt={`Historical UniFriend interface, screenshot ${n}`} /></a>)}</div>}</div><div className="project-links">{p.repoUrl && <a href={p.repoUrl} target="_blank" rel="noreferrer">Source ↗</a>}{p.liveUrl && <a href={p.liveUrl} target="_blank" rel="noreferrer">{p.liveLabel ?? "Open project"} ↗</a>}</div></article>)}</div>{!filtered.length && <div className="empty-state"><h2>No projects match that search.</h2><button className="button secondary" onClick={()=>setQuery("")}>Clear search</button></div>}</section><Contact /></main>;
 }
