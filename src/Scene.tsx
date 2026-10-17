@@ -1,6 +1,6 @@
 export default function Scene() {
   return (
-    <section className="scene-track middle-track" aria-label="Liquid Lens, second composition">
+    <section className="scene-track middle-track" aria-label="Decorative glass droplet composition">
       <div className="scene-pin">
         <div className="scene-frame" aria-hidden="true">
           <picture>
@@ -8,7 +8,6 @@ export default function Scene() {
             <img src="/images/liquid-middle.webp" width="1664" height="936" loading="lazy" alt="" />
           </picture>
         </div>
-        <p className="scene-caption">Liquid Lens / 02 <span>Still image · motion film pending</span></p>
       </div>
     </section>
   );

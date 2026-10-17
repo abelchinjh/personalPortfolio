@@ -6,13 +6,13 @@ const home=read('dist/index.html'),archive=read('dist/portfolio/index.html');
 const baseline=JSON.parse(read('tests/fixtures/portfolio-attribution.json'));
 const escape=s=>s.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll("'",'&#x27;').replaceAll('<','&lt;').replaceAll('>','&gt;');
 test('identity, contacts and removed material are correct on both initial routes',()=>{
- assert.match(home,/Building in stealth/);assert.match(home,/ex-NUS CS · ex-ASEAN scholar/);
+ assert.match(home,/<h1 id="hero-title">A founder building himself<\/h1>/);assert.match(home,/<h2 id="selected-title">Selected Work<\/h2>/);assert.doesNotMatch(home,/Projects with a point of view|guided illustration|major contributor|hero-actions|status-dot/);assert.match(home,/ex-NUS CS · ex-ASEAN scholar/);
  for(const html of [home,archive]){
-  for(const link of ['mailto:hello@abelchinjh.com','https://github.com/abelchinjh','https://x.com/@abelchinjh','https://discordapp.com/users/1334801780273315870'])assert.ok(html.includes(link),link);
+  for(const link of ['mailto:hello@abelchinjh.com','https://github.com/abelchinjh','https://x.com/abelchinjh','https://discordapp.com/users/1334801780273315870'])assert.ok(html.includes(link),link);
   assert.doesNotMatch(html,/nyala|openclaw|\baiu\b|imotorbike|one semester|former ASEAN|technical founder|public work\. private ambition|independent work · malaysia|linkedin\.com/i);
   assert.match(html,/Skip to content/);assert.match(html,/<main id="main" tabindex="-1"/);
  }
- assert.match(home,/2026 – Oct 2026/);
+ assert.match(home,/February–October 2026/);
 });
 test('all remaining project titles, source links and attribution survive removal',()=>{
  assert.equal(baseline.length,26);assert.equal((archive.match(/class="project-row"/g)||[]).length,26);

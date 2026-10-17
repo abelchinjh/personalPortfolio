@@ -10,15 +10,8 @@ export default function Hero() {
         </div>
       </div>
       <div className="hero-content">
-        <p className="eyebrow"><span className="status-dot" /> Founder</p>
-        <h1 id="hero-title">Abel Chin<span className="blue">.</span></h1>
-        <p className="hero-position">Building in stealth.</p>
+        <h1 id="hero-title">A founder building himself</h1>
         <p className="hero-context">ex-NUS CS · ex-ASEAN scholar</p>
-        <div className="hero-actions">
-          <a className="button primary" href="#selected">Selected work <span aria-hidden="true">↓</span></a>
-          <a className="button secondary" href="#contact">Get in touch <span aria-hidden="true">↗</span></a>
-        </div>
-        <p className="still-label">Liquid Lens · still image. Motion film pending.</p>
       </div>
     </section>
   );

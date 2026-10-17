@@ -47,7 +47,6 @@ export default function AgentLaneFlow() {
       </li>)}
     </ol>
     <div className="flow-controls">
-      <p>{allowed ? "A guided illustration of the prototype’s verification flow." : "Static flow · motion preferences respected."}</p>
       {allowed && <button className="button secondary" type="button" onClick={() => {
         if (running) setRunning(false);
         else { setActive(0); setRunning(true); hasPlayed.current = true; }

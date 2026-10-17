@@ -13,7 +13,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     title: "JalanLens",
-    eyebrow: "Huawei Tech4City Competition 2026 + SimplifyNext Agentic AI Hackathon 2026 (semi-finalist) · major contributor",
+    eyebrow: "Huawei Tech4City Competition 2026 + SimplifyNext Agentic AI Hackathon 2026 (semi-finalist)",
     description: "A Clementi accessibility digital twin combining real imagery, Mapillary street views, public feedback and persona agents, later extended with a safety-gated live campus guide for constraint-compliant routes and simulated Unitree Go2 guidance.",
     tags: ["Geospatial", "Supabase", "Physical AI", "Accessibility"],
     accent: "#f7c967",
@@ -48,8 +48,6 @@ export const projects: Project[] = [
     description: "An AI-assisted workflow cockpit for Malaysian corporate-secretarial practices, turning statutory deadlines into scoped reminders, scheduled jobs and reviewer-ready evidence receipts.",
     tags: ["React", "TypeScript", "Supabase", "AI operations"],
     accent: "#b59aff",
-    repoUrl: "https://github.com/abelchinjh/qoder-corpsec-command-center",
-    liveUrl: "https://credence-qoder-corpsec.abelchinjh.workers.dev",
     liveLabel: "Open live demo",
     featured: true,
   },
@@ -60,7 +58,6 @@ export const projects: Project[] = [
     tags: ["React", "TypeScript", "Atlas API", "Cloudflare Workers"],
     accent: "#6ed8e7",
     repoUrl: "https://github.com/abelchinjh/atlas-relay",
-    liveUrl: "https://atlas-relay.abelchinjh.workers.dev",
     liveLabel: "Open live demo",
   },
   {

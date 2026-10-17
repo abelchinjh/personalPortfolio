@@ -22,7 +22,7 @@ export default function App({ route = "/" }: { route?: string }) {
           <a href="/portfolio">Work</a>
           <a href="/#background">Background</a>
           <a href="/#contact">
-            Contact <span aria-hidden="true">↗</span>
+            Contact
           </a>
         </nav>
       </header>

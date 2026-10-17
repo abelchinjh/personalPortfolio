@@ -5,7 +5,6 @@ export default function Contact() {
       className="contact section"
       aria-labelledby="contact-title"
     >
-      <p className="eyebrow">OPEN A CONVERSATION</p>
       <h2 id="contact-title">
         Get in touch<span className="blue">.</span>
       </h2>
@@ -19,17 +18,17 @@ export default function Contact() {
           target="_blank"
           rel="noreferrer"
         >
-          GitHub <span aria-hidden="true">↗</span>
+          <img className="contact-icon" src="/icons/github.svg" width="20" height="20" alt="" />GitHub <span aria-hidden="true">↗</span>
         </a>
-        <a href="https://x.com/@abelchinjh" target="_blank" rel="noreferrer">
-          X <span aria-hidden="true">↗</span>
+        <a href="https://x.com/abelchinjh" target="_blank" rel="noreferrer">
+          <img className="contact-icon" src="/icons/x.svg" width="20" height="20" alt="" />X <span aria-hidden="true">↗</span>
         </a>
         <a
           href="https://discordapp.com/users/1334801780273315870"
           target="_blank"
           rel="noreferrer"
         >
-          Discord <span aria-hidden="true">↗</span>
+          <img className="contact-icon" src="/icons/discord.svg" width="20" height="20" alt="" />Discord <span aria-hidden="true">↗</span>
         </a>
       </div>
     </section>
