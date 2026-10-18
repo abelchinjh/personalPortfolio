@@ -27,7 +27,8 @@ export default function HomePage() {
     <div className="surface after-scene">
       <section id="background" className="section background" aria-labelledby="background-title">
         <div className="background-intro"><div><h2 id="background-title">Background<span className="blue">.</span></h2>
-          <p className="lead">I’m Abel, a founder building in stealth.</p><p>My portfolio brings together software projects, collaborations and competition work from my path so far.</p></div>
+          <p className="lead">I started coding and building projects in college.</p>
+          <p>After leaving, I took a two-and-a-half-year religious hiatus. In August 2025, I joined my first hackathon. Since then, I’ve continued learning independently through hackathons, tech conferences and hands-on projects, eventually becoming a founder building in stealth.</p></div>
           <img className="portrait" src="/images/portrait-576.webp" srcSet="/images/portrait-576.webp 576w, /images/portrait-864.webp 864w" sizes="(max-width: 640px) 216px, 288px" width="288" height="384" loading="lazy" alt="Abel Chin" />
         </div>
         <div className="background-columns"><div><h3>Education & scholarships</h3>{education.map(e => <article className="education-entry" key={e.shortName}>
