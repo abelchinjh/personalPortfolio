@@ -1,5 +1,7 @@
 # Controlled cobalt ribbon scene
 
+Historical renderer, superseded by [Quiet cobalt constellation](../constellation/README.md). Its published media assets were removed when Abel selected the constellation direction.
+
 This replaces the middle Liquid Lens film with a different subject. The hero lens files are unchanged. Three extruded parametric ribbon meshes use fixed geometry, depth-tested surfaces and art-directed cobalt lighting on a graphite environment. A bounded periodic 3D turn and twist completes one loop in 144 frames / 24 fps / 6 seconds. This is a stylized real 3D mesh render, not an image-to-video service or a CSS animation of a still.
 
 Installed Chromium WebGL2/SwiftShader renders the frames. Installed FFmpeg encodes VP9 WebM and H.264 MP4 (yuv420p, faststart), with matching first-frame WebP posters. No added packages or paid service. The phone uses its own wider orthographic framing; it is not cropped from the desktop output. The scene sits inside the existing native sticky reveal/hold/cover geometry.

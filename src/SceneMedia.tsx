@@ -34,8 +34,8 @@ export default function SceneMedia({ scene, eager = false }: { scene: "hero" | "
     return () => { document.removeEventListener("visibilitychange", update); media.pause(); };
   }, [allowed, near, paused, mobile]);
   const load = allowed && near && !failed;
-  const asset = scene === "hero" ? "liquid-hero" : "cobalt-ribbons";
-  const poster = scene === "hero" ? "liquid-hero-3d" : "cobalt-ribbons";
+  const asset = scene === "hero" ? "liquid-hero" : "quiet-constellation";
+  const poster = scene === "hero" ? "liquid-hero-3d" : "quiet-constellation";
   const name = `${asset}${mobile ? "-mobile" : ""}`;
   return <div ref={frame} className="scene-frame">
     <picture aria-hidden="true">

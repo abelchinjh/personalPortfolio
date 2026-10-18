@@ -1,0 +1,33 @@
+<!doctype html><meta charset="utf-8"><title>Quiet cobalt constellation renderer</title><style>html,body{margin:0;background:#080d13}canvas{display:block;width:100vw;height:100vh}</style><canvas></canvas><script>
+const canvas=document.querySelector('canvas');const gl=canvas.getContext('webgl2',{preserveDrawingBuffer:true,antialias:true,alpha:false});if(!gl)throw Error('WebGL2 unavailable');
+function shader(type,source){const s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));return s;}
+function program(v,f){const p=gl.createProgram();gl.attachShader(p,shader(gl.VERTEX_SHADER,v));gl.attachShader(p,shader(gl.FRAGMENT_SHADER,f));gl.linkProgram(p);if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(p));return p;}
+const bg=program(`#version 300 es
+in vec2 p;out vec2 uv;void main(){uv=p;gl_Position=vec4(p,0.,1.);}`,`#version 300 es
+precision highp float;in vec2 uv;uniform float portrait;out vec4 c;float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}void main(){float d=abs(uv.y-mix(.72,1.27,portrait)*uv.x);float haze=exp(-d*d*7.)*exp(-dot(uv,uv)*.32);vec3 col=vec3(.021,.030,.042)+vec3(.012,.021,.032)*haze;col*=1.-.28*pow(length(uv*.65),2.);col+=(hash(gl_FragCoord.xy)-.5)*.0025;c=vec4(col,1.);}`);
+const projection=`vec2 project(vec3 p){float h=portrait>.5?7.3:5.3;float scale=6./(6.+p.z);return p.xy*scale/(vec2(resolution.x/resolution.y,1.)*h*.5);}`;
+const points=program(`#version 300 es
+in vec3 position;in vec3 color;in vec3 appearance;uniform vec2 resolution;uniform float portrait;out vec3 C;out float opacity;out float blur;${projection}
+void main(){gl_Position=vec4(project(position),0.,1.);float px=portrait>.5?(resolution.x/432.)*.80:resolution.y/720.;gl_PointSize=appearance.x*px*clamp(6./(6.+position.z),.65,1.3);C=color;opacity=appearance.y;blur=appearance.z;}`,`#version 300 es
+precision highp float;in vec3 C;in float opacity;in float blur;out vec4 c;void main(){float r=length(gl_PointCoord-.5)*2.;if(r>1.)discard;float sharp=exp(-r*r*18.)+exp(-r*r*5.5)*.30;float soft=exp(-r*r*4.8)*.65;float a=mix(sharp,soft,blur)*opacity;c=vec4(C,a);}`);
+const lines=program(`#version 300 es
+in vec3 position;uniform vec2 resolution;uniform float portrait;${projection}
+void main(){gl_Position=vec4(project(position),0.,1.);}`,`#version 300 es
+precision highp float;out vec4 c;void main(){c=vec4(.34,.47,.72,.12);}`);
+const quad=gl.createBuffer(),pointBuffer=gl.createBuffer(),lineBuffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,quad);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+let seed=260618;function random(){seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;}function normal(){return Math.sqrt(-2.*Math.log(Math.max(random(),.00001)))*Math.cos(random()*Math.PI*2.);}
+const particles=[],edges=[];function particle(t,width,z,size,alpha,blur=0,accent=false){const p={t,lateral:normal()*width,xJitter:normal()*.045,z,size,alpha,blur,phase:random()*Math.PI*2.,color:accent?[.12,.35,1.]:[.70+.25*random(),.82+.14*random(),1.]};particles.push(p);return particles.length-1;}
+// Low-luminance depth dust: a field, not a fully connected graph.
+for(let i=0;i<900;i++){const t=random()*2.3-1.15;particle(t,.30+random()*.45,-.9+(t+1.15)/2.3*2.9+random()*.7,4.+random()*6.,.26+random()*.36,.12+random()*.55,random()<.38);}
+// Six irregular local constellations, fourteen delicate connections total.
+const centers=[-.53,-.28,-.12,.13,.32,.56];
+for(let group=0;group<centers.length;group++){const t=centers[group]+random()*.025;const ids=[];for(let j=0;j<3;j++)ids.push(particle(t+(j-1)*.035,.10,-.20+random()*.4,10.+random()*4.,.90+random()*.10,0,(group+j)%3===0));edges.push([ids[0],ids[1]],[ids[1],ids[2]]);if(group%3===0)edges.push([ids[0],ids[2]]);}
+for(let i=0;i<38;i++)particle(random()*1.8-.9,.55,-.8+random()*1.8,6.+random()*5.,.65+random()*.30,0,i%3===0);
+// A few soft foreground motes provide depth without large glass-like orbs.
+for(let i=0;i<11;i++)particle(-.90+random()*.72,.40,-1.5-random()*.45,20.+random()*12.,.60+random()*.30,1,i%2===0);
+function position(p,phase,mobile){let x=p.t*(mobile?1.02:4.9)+p.xJitter*(mobile?1.4:1.0),y=p.t*(mobile?2.8:2.0)+.10*Math.sin(p.t*3.0)+p.lateral,z=p.z;x+=.025*(Math.sin(phase+p.phase)-Math.sin(p.phase));y+=.019*(Math.cos(phase+p.phase)-Math.cos(p.phase));z+=.025*Math.sin(phase+p.phase);x-=.045*Math.sin(phase);y-=.018*(1.-Math.cos(phase));const roll=.007*Math.sin(phase);return[x*Math.cos(roll)-y*Math.sin(roll),x*Math.sin(roll)+y*Math.cos(roll),z];}
+function attributes(p,buffer,stride,fields){gl.bindBuffer(gl.ARRAY_BUFFER,buffer);for(const[name,n,offset]of fields){const a=gl.getAttribLocation(p,name);gl.enableVertexAttribArray(a);gl.vertexAttribPointer(a,n,gl.FLOAT,false,stride,offset);}}
+function uniforms(p,width,height,mobile){gl.uniform2f(gl.getUniformLocation(p,'resolution'),width,height);gl.uniform1f(gl.getUniformLocation(p,'portrait'),mobile?1:0);}
+window.sceneInfo={particles:particles.length,connectedAnchors:18,connections:edges.length,frames:192,fps:24,method:'3D point field projected as Gaussian glow sprites, sparse GL_LINES; deterministic periodic motion; no image texture'};
+window.draw=(frame=0,width=1664,height=936)=>{const phase=frame/192*Math.PI*2.,mobile=width<height;canvas.width=width;canvas.height=height;gl.viewport(0,0,width,height);gl.disable(gl.DEPTH_TEST);gl.disable(gl.BLEND);gl.useProgram(bg);attributes(bg,quad,0,[['p',2,0]]);gl.uniform1f(gl.getUniformLocation(bg,'portrait'),mobile?1:0);gl.drawArrays(gl.TRIANGLES,0,3);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE);const poses=particles.map(p=>position(p,phase,mobile));gl.useProgram(lines);const lineData=new Float32Array(edges.flatMap(([a,b])=>[...poses[a],...poses[b]]));gl.bindBuffer(gl.ARRAY_BUFFER,lineBuffer);gl.bufferData(gl.ARRAY_BUFFER,lineData,gl.DYNAMIC_DRAW);attributes(lines,lineBuffer,12,[['position',3,0]]);uniforms(lines,width,height,mobile);gl.drawArrays(gl.LINES,0,lineData.length/3);gl.useProgram(points);const data=new Float32Array(particles.flatMap((p,i)=>[...poses[i],...p.color,p.size,p.alpha*(.96+.04*Math.cos(phase+p.phase)),p.blur]));gl.bindBuffer(gl.ARRAY_BUFFER,pointBuffer);gl.bufferData(gl.ARRAY_BUFFER,data,gl.DYNAMIC_DRAW);attributes(points,pointBuffer,36,[['position',3,0],['color',3,12],['appearance',3,24]]);uniforms(points,width,height,mobile);gl.drawArrays(gl.POINTS,0,particles.length);gl.finish();return canvas.toDataURL('image/png').split(',')[1];};draw();
+</script>
