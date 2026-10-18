@@ -34,14 +34,16 @@ export default function SceneMedia({ scene, eager = false }: { scene: "hero" | "
     return () => { document.removeEventListener("visibilitychange", update); media.pause(); };
   }, [allowed, near, paused, mobile]);
   const load = allowed && near && !failed;
-  const name = `liquid-${scene}${mobile ? "-mobile" : ""}`;
+  const asset = scene === "hero" ? "liquid-hero" : "cobalt-ribbons";
+  const poster = scene === "hero" ? "liquid-hero-3d" : "cobalt-ribbons";
+  const name = `${asset}${mobile ? "-mobile" : ""}`;
   return <div ref={frame} className="scene-frame">
     <picture aria-hidden="true">
-      <source media="(max-width: 640px)" srcSet={`/images/liquid-${scene}-3d-mobile.webp`} />
-      <img src={`/images/liquid-${scene}-3d.webp`} width="1280" height="720" alt="" loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : "auto"} />
+      <source media="(max-width: 640px)" srcSet={`/images/${poster}-mobile.webp`} />
+      <img src={`/images/${poster}.webp`} width="1280" height="720" alt="" loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : "auto"} />
     </picture>
     {load && <video key={name} ref={video} className={ready ? "scene-video is-ready" : "scene-video"} muted loop playsInline preload="none" aria-hidden="true" tabIndex={-1}
-      poster={`/images/liquid-${scene}-3d${mobile ? "-mobile" : ""}.webp`}
+      poster={`/images/${poster}${mobile ? "-mobile" : ""}.webp`}
       onLoadedData={() => { setReady(true); if (!paused && !document.hidden) video.current?.play().catch((error: DOMException) => { if (error.name !== "AbortError") setPaused(true); }); }}
       onError={() => { setFailed(true); setReady(false); }}>
       <source src={`/videos/${name}.webm`} type="video/webm" />

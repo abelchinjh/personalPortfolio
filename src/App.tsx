@@ -1,3 +1,4 @@
+import ThemeSelector from "./ThemeSelector";
 import { useEffect } from "react";
 import { useMotionAllowed } from "./useMotionAllowed";
 import HomePage from "./pages/HomePage";
@@ -24,6 +25,7 @@ export default function App({ route = "/" }: { route?: string }) {
           <a href="/#contact">
             Contact
           </a>
+          <ThemeSelector />
         </nav>
       </header>
       {route.replace(/\/$/, "") === "/portfolio" ? (

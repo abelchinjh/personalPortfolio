@@ -31,7 +31,7 @@ export default function AgentLaneFlow() {
     return () => clearTimeout(timer);
   }, [active, running, allowed]);
   useEffect(() => {
-    const stop = () => { if (document.hidden) setRunning(false); };
+    const stop = () => { if (document.hidden) { setRunning(false); setActive(-1); } };
     document.addEventListener("visibilitychange", stop);
     return () => document.removeEventListener("visibilitychange", stop);
   }, []);
@@ -46,11 +46,6 @@ export default function AgentLaneFlow() {
         <span className="flow-number" aria-hidden="true">0{i + 1}</span><h3>{s.title}</h3><p>{s.detail}</p>
       </li>)}
     </ol>
-    <div className="flow-controls">
-      {allowed && <button className="button secondary" type="button" onClick={() => {
-        if (running) setRunning(false);
-        else { setActive(0); setRunning(true); hasPlayed.current = true; }
-      }}>{running ? "Pause flow" : "Replay flow"}</button>}
-    </div>
+
   </section>;
 }

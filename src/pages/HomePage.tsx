@@ -33,7 +33,7 @@ export default function HomePage() {
         <div className="background-columns"><div><h3>Education & scholarships</h3>{education.map(e => <article className="education-entry" key={e.shortName}>
           <p className="eyebrow">{e.period}</p><h4>{e.institution}</h4><p>{e.status}</p><p>{e.programme}</p><p className="scholarship">{e.scholarship}</p>
           <details><summary>Education details</summary><p>{e.detail}</p><p>{e.scholarshipDetail}</p></details></article>)}</div>
-          <div><h3>Experience</h3>{leadership.map(e => <article className="experience-entry" key={e.title}><h4>{e.title}</h4><p className="project-context">{e.period}</p><p>{e.description}</p></article>)}</div>
+          <div><h3>Experience</h3>{leadership.map(e => <article className="experience-entry" key={e.title}><h4>{e.title}</h4><p className="project-context">{e.period}</p><p>{e.description}</p>{e.highlight && <p>{e.highlight}</p>}</article>)}</div>
         </div>
       </section>
       <section className="section recognition" aria-labelledby="recognition-title"><h2 id="recognition-title">Selected recognition<span className="blue">.</span></h2>

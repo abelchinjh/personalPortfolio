@@ -6,7 +6,7 @@ export default function Hero() {
         <SceneMedia scene="hero" eager />
       </div>
       <div className="hero-content">
-        <h1 id="hero-title">A founder building himself</h1>
+        <h1 id="hero-title">A founder building in stealth</h1>
         <p className="hero-context">ex-NUS CS · ex-ASEAN scholar</p>
       </div>
     </section>
