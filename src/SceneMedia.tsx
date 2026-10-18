@@ -49,6 +49,6 @@ export default function SceneMedia({ scene, eager = false }: { scene: "hero" | "
       <source src={`/videos/${name}.webm`} type="video/webm" />
       <source src={`/videos/${name}.mp4`} type="video/mp4" />
     </video>}
-    {load && <button className="scene-toggle" type="button" onClick={() => setPaused(value => !value)} aria-label={`${paused ? "Play" : "Pause"} ${scene} animation`}>{paused ? "Play animation" : "Pause animation"}</button>}
+    {load && scene === "hero" && <button className="scene-toggle" type="button" onClick={() => setPaused(value => !value)} aria-label={`${paused ? "Play" : "Pause"} ${scene} animation`}>{paused ? "Play animation" : "Pause animation"}</button>}
   </div>;
 }
