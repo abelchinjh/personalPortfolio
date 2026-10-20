@@ -38,3 +38,10 @@ html[data-motion='off']{scroll-behavior:auto}html[data-motion='off'] .hero-track
 .hero-last-line{display:block}.hero-content h1{max-width:550px}:root[data-theme="dark"] .hero-track .scene-frame::after{background:linear-gradient(90deg,#0d171be6 0%,#0d171bd9 52%,#0d171b55 75%,#0d171b20 100%)}
 @media(min-width:641px) and (max-width:1100px){.hero-content h1{max-width:58%}}
 @media(max-width:640px){.hero-content h1{max-width:100%}:root[data-theme="dark"] .hero-track .scene-frame::after{background:linear-gradient(180deg,#0d171be6 0%,#0d171bd9 32%,#0d171b40 65%,#0d171b20 100%)}}
+
+/* Center the copy against the full hero scene, preserving mobile positioning. */
+@media(min-width:641px){
+  .hero-content{display:flex;flex-direction:column;justify-content:safe center;align-items:flex-start;padding-block:0}
+  .hero-content>*{flex-shrink:0}
+  .hero-context{margin-bottom:0}
+}
