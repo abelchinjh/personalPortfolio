@@ -10,8 +10,8 @@ export default function Contact() {
       </h2>
       <p>For introductions, collaborations and technical conversations.</p>
       <div className="contact-links">
-        <a href="mailto:hello@abelchinjh.com">
-          hello@abelchinjh.com <span aria-hidden="true">↗</span>
+        <a href="mailto:ablechangehh@gmail.com">
+          ablechangehh@gmail.com <span aria-hidden="true">↗</span>
         </a>
         <a
           href="https://github.com/abelchinjh"
